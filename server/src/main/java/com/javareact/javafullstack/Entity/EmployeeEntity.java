@@ -7,11 +7,16 @@ import lombok.AllArgsConstructor;
 // import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 //lombok is used to reduce as a boilerplate code for getter and setter by using the annotation @Getter and @Setter
 
@@ -21,10 +26,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor // it is used to generate a no-argument constructor for the class, which is required by some frameworks and libraries that use reflection to create instances of the class. It allows you to create an instance of the class without providing any arguments, which can be useful in certain situations, such as when working with serialization or when using dependency injection frameworks.
 public class EmployeeEntity {
     @Id
-    private Long id;
+    @NonNull
+    @Indexed(unique = true)
+    private Long employeeId;
+    @NonNull
     private String name;
+    @NonNull
+    @Indexed(unique = true)
     private String email;
+    @NonNull
+    private String password;
+    @NonNull
     private String phone;
+    @DBRef
+    private List <JournalEntity> journalEntries = new ArrayList<>();
     private LocalDateTime CreatedAt;
     private LocalDateTime UpdatedAt;
 

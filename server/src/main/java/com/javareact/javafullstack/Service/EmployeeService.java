@@ -7,49 +7,72 @@ import org.springframework.stereotype.Service;
 import java.lang.*;
 import java.time.LocalDateTime;
 
-@Service
+@Service // it is used to mark the class as a service provider, which holds the business logic
 public class EmployeeService {
-    @Autowired
+    @Autowired // it is used to wire the EmployeeRepository bean into the EmployeeService, allowing us to use its methods to perform database operations related to employees.
     private EmployeeRepository employeeRepository;
 
     public Iterable<EmployeeEntity> allEmployeesList() {
-        return employeeRepository.findAll();
+        try {
+         return employeeRepository.findAll();
+        } catch (Exception e) {
+            System.out.println("Error fetching employee list: " + e.getMessage());
+            return null;
+        }
     }
 
     public EmployeeEntity getEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+        try {
+            return employeeRepository.findById(id).orElse(null);
+        } catch (Exception e) {
+            System.out.println("Error fetching employee by id: " + e.getMessage());
+            return null;
+        }
     }
 
     public String createEmployee(EmployeeEntity employee) {
-        //set time
-        employee.setCreatedAt(LocalDateTime.now());
-        employeeRepository.save(employee).getId();
-        return "Employee with id " + employee.getId() + " created successfully";
+        try {
+            if (employeeRepository.existsById(employee.getId())) {
+                return "Employee with id " + employee.getId() + " already exists";
+            }
+            employee.setCreatedAt(LocalDateTime.now());
+            employeeRepository.save(employee).getId();
+            return "Employee with id " + employee.getId() + " created successfully";
+        } catch (Exception e) {
+            System.out.println("Error creating employee: " + e.getMessage());
+            return "Failed to create employee";
+        }
     }
 
     public String deleteEmployee(Long id) {
-        var f = employeeRepository.findById(id);
-
-        if (f.isEmpty()) {
-            // employee does not exist
-            return "Employee with id " + id + " does not exist";
-
-        } else {
-            // employee is present
-            employeeRepository.delete(f.get());
+        try {
+            if(employeeRepository.findById(id).isEmpty()){
+                return "Employee with id " + id + " does not exist";
+            }
+            employeeRepository.deleteById(id);
             return "Employee with id " + id + " deleted successfully";
+        } catch (Exception e) {
+            System.out.println("Error deleting employee: " + e.getMessage());
+            return "Failed to delete employee";
         }
     }
 
     public String updateEmployee(Long id, EmployeeEntity newEntry) {
-        EmployeeEntity old = employeeRepository.findById(id).orElse(null);
-        if(old!=null){
-            old.setEmail(newEntry.getEmail()!=null && !newEntry.getEmail().isEmpty() ? newEntry.getEmail() : old.getEmail());
-            old.setPhone(newEntry.getPhone()!=null && !newEntry.getPhone().isEmpty() ? newEntry.getPhone() : old.getPhone());
-            old.setUpdatedAt(LocalDateTime.now());
+        try {
+            EmployeeEntity old = employeeRepository.findById(id).orElse(null);
+            if(old!=null){
+                old.setEmail(newEntry.getEmail()!=null && !newEntry.getEmail().isEmpty() ? newEntry.getEmail() : old.getEmail());
+                old.setPhone(newEntry.getPhone()!=null && !newEntry.getPhone().isEmpty() ? newEntry.getPhone() : old.getPhone());
+                old.setUpdatedAt(LocalDateTime.now());
+            } else {
+                return "Employee with id " + id + " does not exist";
+            }
+            employeeRepository.save(old);
+            return "Employee with id " + id + " updated successfully";
+        } catch (Exception e) {
+            System.out.println("Error updating employee: " + e.getMessage());
+            return "Failed to update employee";
         }
-        employeeRepository.save(old);
-        return "Employee with id " + id + " updated successfully";
     }
 }
 

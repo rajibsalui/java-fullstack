@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "java-fullstack-api-collection",
+		"name": "Java Fullstack API - Employee & Journal Management",
+		"description": "Complete API testing collection for Employee and Journal management system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "API Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check if the API is running"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee Management",
+			"item": [
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employee/employeelist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"employeelist"
+							]
+						},
+						"description": "Fetch all employees from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employee/employeelist/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"employeelist",
+								"1"
+							]
+						},
+						"description": "Get a specific employee by their ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"employeeId\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"password123\",\n    \"phone\": \"+1234567890\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"create"
+							]
+						},
+						"description": "Create a new employee record"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"employeeId\": 2,\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane.smith@example.com\",\n    \"password\": \"securePass456\",\n    \"phone\": \"+9876543210\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"create"
+							]
+						},
+						"description": "Create another employee for testing"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"employeeId\": 1,\n    \"name\": \"John Updated Doe\",\n    \"email\": \"john.updated@example.com\",\n    \"password\": \"newPassword123\",\n    \"phone\": \"+1234567899\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"update",
+								"1"
+							]
+						},
+						"description": "Update an existing employee's information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employee/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"delete",
+								"1"
+							]
+						},
+						"description": "Delete an employee by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Journal Management",
+			"item": [
+				{
+					"name": "Get All Journal Entries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/journal/entries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"entries"
+							]
+						},
+						"description": "Fetch all journal entries from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Journal Entries By Employee ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/journal/entries/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"entries",
+								"1"
+							]
+						},
+						"description": "Get all journal entries for a specific employee"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Journal Entry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My First Day at Work\",\n    \"content\": \"Today was an amazing first day! I met the team and learned about the project roadmap. Everyone was very welcoming and helpful.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/journal/create/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"create",
+								"1"
+							]
+						},
+						"description": "Create a new journal entry for an employee (employeeId = 1)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Journal Entry 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Sprint Planning Meeting\",\n    \"content\": \"Had our sprint planning session today. We discussed the upcoming features and divided tasks among team members. I'll be working on the authentication module.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/journal/create/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"create",
+								"1"
+							]
+						},
+						"description": "Create another journal entry for testing"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Journal Entry for Employee 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Project Milestone Achieved\",\n    \"content\": \"Successfully completed the database migration project. The team worked hard, and we delivered on time!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/journal/create/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"create",
+								"2"
+							]
+						},
+						"description": "Create a journal entry for employee 2"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Journal Entry",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated: My First Day at Work\",\n    \"content\": \"Today was an amazing first day! I met the team and learned about the project roadmap. Everyone was very welcoming and helpful. UPDATE: I also got my development environment set up!\",\n    \"employeeId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/journal/update/{journal_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"update",
+								"{journal_id}"
+							]
+						},
+						"description": "Update an existing journal entry. Replace {journal_id} with the actual ObjectId from MongoDB"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Journal Entry",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/journal/delete/{journal_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"delete",
+								"{journal_id}"
+							]
+						},
+						"description": "Delete a journal entry by ID. Replace {journal_id} with the actual ObjectId from MongoDB"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
